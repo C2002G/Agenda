@@ -19,5 +19,10 @@
             <button type="submit">Entrar</button>
         </div>
     </form>
+    {% for message in messages %}
+        <div align="center">
+            <strong>Erro! </strong>{{ message }}
+        </div>
+    {% endfor %}
 </body>
 </html>
