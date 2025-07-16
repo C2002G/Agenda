@@ -43,3 +43,8 @@ def submit_evento(request):
                               descricao=descricao,
                               usuario=usuario)
     return redirect('/')
+
+@login_required(login_url='/login/')
+def delete_evento(request, id_evento):
+    Evento.objects.get(id=id_evento).delete()
+    return redirect('/')
