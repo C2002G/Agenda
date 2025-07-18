@@ -3,6 +3,7 @@ from core.models import Evento
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from datetime import datetime
 
 def login_user(request):
     return render(request, 'login.html')
@@ -25,9 +26,12 @@ def submit_login(request,):
 @login_required(login_url='/login/')
 def lista_eventos(request):
     usario = request.user
-    evento = Evento.objects.filter(usuario=usario)
+    data_atual = datetime.now()
+    evento = Evento.objects.filter(usuario=usario,
+                                   data_evento__gt=data_atual)
     dados = {'eventos': evento}
     return render (request, 'agenda.html', dados)
+# parei no 05:27
 @login_required(login_url='/login/')
 def evento(request):
     id_evento = request.GET.get('id')
